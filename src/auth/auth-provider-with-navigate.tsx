@@ -27,7 +27,10 @@ export const AuthProviderWithNavigate = ({
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      authorizationParams={{ audience, redirect_uri: redirectUri }}
+      authorizationParams={{
+        audience,
+        redirect_uri: redirectUri,
+      }}
       onRedirectCallback={onRedirectCallback}
     >
       {children}

@@ -12,6 +12,7 @@ export const TopNavBar = () => {
       authorizationParams: {
         prompt: "login",
         screen_hint: "signup",
+        scope: "openid email profile",
       },
     })
   }

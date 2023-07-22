@@ -13,6 +13,7 @@ import { Company } from "../../common/types/company.ts"
 import CompaniesPageCss from "./css/companies.module.css"
 import { useEffect, useState } from "react"
 import { Pagination } from "../../components/common/Pagination.tsx"
+import { NavLink } from "react-router-dom"
 
 const mockData: Company[] = [
   { id: 1, name: "Walmart", headquarters: "Portland, Oregon" },
@@ -40,7 +41,9 @@ export const CompaniesPage = () => {
     <div>
       <Title text={"Companies"} />
       <div className={CompaniesPageCss.tableHeader}>
-        <Button variant={ButtonVariant.Green}>create</Button>
+        <NavLink to={"/companies/new"}>
+          <Button variant={ButtonVariant.Green}>create</Button>
+        </NavLink>
         <Pagination />
       </div>
       <TableContainer>

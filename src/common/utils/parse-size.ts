@@ -1,4 +1,6 @@
-export const parseSize = (size: number | string): string => {
+import { Size } from "../types/components.ts"
+
+export const parseSize = (size: Size): string => {
   if (typeof size === "string") {
     return size
   }

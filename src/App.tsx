@@ -6,6 +6,7 @@ import { HomePage } from "./routes/home-page.tsx"
 import { ErrorPage } from "./error-page.tsx"
 import { CallbackPage } from "./routes/callback-page.tsx"
 import { CompaniesPage } from "./routes/companies/companies-page.tsx"
+import { CompaniesCreatePage } from "./routes/companies/companies-create-page.tsx"
 
 function App() {
   const { isLoading } = useAuth0()
@@ -20,6 +21,10 @@ function App() {
       <Route
         path={"/applications"}
         element={<AuthenticationGuard component={ApplicationsPage} />}
+      />
+      <Route
+        path={"/companies/new"}
+        element={<AuthenticationGuard component={CompaniesCreatePage} />}
       />
       <Route
         path={"/companies"}

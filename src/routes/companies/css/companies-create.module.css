@@ -1,0 +1,20 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding: 16px 0;
+}
+
+.inputRow {
+    display: flex;
+    align-items: center;
+}
+
+.inputRowLabel {
+    width: 200px;
+}
+
+.submitContainer {
+    display: flex;
+    justify-content: center;
+}

@@ -3,3 +3,8 @@ export type Company = {
   name: string
   headquarters: string
 }
+
+export type CompanyForm = {
+  name: string
+  headquarters: string
+}

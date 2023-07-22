@@ -3,9 +3,17 @@
     color: white;
 }
 
+.blue:hover {
+    background-color: #3F83F8;
+}
+
 .green {
     background-color: #31C48D;
     color: white;
+}
+
+.green:hover {
+    background-color: #0E9F6E;
 }
 
 .red {

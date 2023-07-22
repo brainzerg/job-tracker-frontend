@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, CSSProperties, ReactNode } from "react"
 import TableCss from "./css/table.module.css"
-import { ChildrenProps } from "../../common/types/children-props.ts"
+import { ChildrenProps } from "../../common/types/components.ts"
 
 type TableProps = {
   children: ReactNode

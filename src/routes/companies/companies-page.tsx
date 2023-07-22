@@ -19,6 +19,7 @@ const mockData: Company[] = [
   { id: 2, name: "Nike", headquarters: "Portland, Oregon" },
   { id: 3, name: "Tektronix", headquarters: "Portland, Oregon" },
   { id: 4, name: "Garmin", headquarters: "Portland, Oregon" },
+  { id: 4, name: "HP", headquarters: "Portland, Oregon" },
 ]
 
 export const CompaniesPage = () => {

@@ -1,13 +1,27 @@
-import Layout from "./layout.module.css"
+import { NavLink } from "react-router-dom"
+
+import SideMenuCss from "./css/side-menu.module.css"
+import { getClassName } from "../../common/utils/get-class-name.ts"
+
+const menu = ["applications", "jobs", "contacts", "skills", "companies"]
 
 export const SideMenu = () => {
   return (
-    <div className={Layout.sideMenuContainer}>
-      <div className={Layout.sideMenuLink}>Applications</div>
-      <div className={Layout.sideMenuLink}>Jobs</div>
-      <div className={Layout.sideMenuLink}>Contacts</div>
-      <div className={Layout.sideMenuLink}>Skills</div>
-      <div className={Layout.sideMenuLink}>Companies</div>
-    </div>
+    <ul className={SideMenuCss.container}>
+      {menu.map((menuItem) => (
+        <li key={menuItem} className={SideMenuCss.item}>
+          <NavLink
+            to={"/" + menuItem}
+            className={({ isActive }) =>
+              getClassName({
+                [SideMenuCss.selected]: isActive,
+              })
+            }
+          >
+            {menuItem}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
   )
 }

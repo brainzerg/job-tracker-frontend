@@ -3,6 +3,8 @@ import { TopNavBar } from "./top-nav-bar.tsx"
 import { SideMenu } from "./side-menu.tsx"
 import { useAuth0 } from "@auth0/auth0-react"
 
+import LayoutCss from "./css/layout.module.css"
+
 type Props = {
   children: ReactNode
 }
@@ -10,9 +12,9 @@ type Props = {
 export const Layout = ({ children }: Props) => {
   const { isAuthenticated } = useAuth0()
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div className={LayoutCss.page}>
       <TopNavBar />
-      <div style={{ display: "flex" }}>
+      <div className={LayoutCss.mainContainer}>
         {isAuthenticated && <SideMenu />}
         {children}
       </div>

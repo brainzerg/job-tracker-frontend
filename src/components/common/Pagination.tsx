@@ -1,5 +1,6 @@
 import PaginationCss from "./css/pagination.module.css"
 import { Button } from "./Button.tsx"
+import { palette } from "../../styles/palette.ts"
 
 type Props = {
   page?: number
@@ -12,12 +13,12 @@ export const Pagination = ({ page = 1, totalPages = 1 }: Props) => {
 
   return (
     <div className={PaginationCss.container}>
-      <Button disabled={!canClickPrev}>
+      <Button disabled={!canClickPrev} padding={""}>
         <span
           className={`material-symbols-outlined ${PaginationCss.icon}`}
           style={{
             fontSize: "16px",
-            color: canClickPrev ? "black" : "#e5e5e5",
+            color: canClickPrev ? "black" : palette.gray["300"],
           }}
         >
           arrow_back_ios
@@ -26,12 +27,12 @@ export const Pagination = ({ page = 1, totalPages = 1 }: Props) => {
       <span>
         Page {page} of {totalPages}
       </span>
-      <Button disabled={!canClickNext}>
+      <Button disabled={!canClickNext} padding={""}>
         <span
           className={`material-symbols-outlined ${PaginationCss.icon}`}
           style={{
             fontSize: "16px",
-            color: canClickNext ? "black" : "#e5e5e5",
+            color: canClickNext ? "black" : palette.gray["300"],
           }}
         >
           arrow_forward_ios

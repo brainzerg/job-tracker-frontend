@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonVariant,
   Table,
   TableContainer,
   Td,
@@ -38,7 +39,7 @@ export const CompaniesPage = () => {
     <div>
       <Title text={"Companies"} />
       <div className={CompaniesPageCss.tableHeader}>
-        <Button>create</Button>
+        <Button variant={ButtonVariant.Green}>create</Button>
         <Pagination />
       </div>
       <TableContainer>
@@ -57,9 +58,9 @@ export const CompaniesPage = () => {
                 <Td>{row.name}</Td>
                 <Td>{row.headquarters}</Td>
                 <Td>
-                  <div>
-                    <Button>update</Button>
-                    <Button>delete</Button>
+                  <div className={CompaniesPageCss.tableButtonContainer}>
+                    <Button variant={ButtonVariant.Blue}>update</Button>
+                    <Button variant={ButtonVariant.Red}>delete</Button>
                   </div>
                 </Td>
               </Tr>

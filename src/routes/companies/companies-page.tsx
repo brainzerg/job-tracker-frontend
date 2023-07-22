@@ -20,7 +20,7 @@ const mockData: Company[] = [
   { id: 2, name: "Nike", headquarters: "Portland, Oregon" },
   { id: 3, name: "Tektronix", headquarters: "Portland, Oregon" },
   { id: 4, name: "Garmin", headquarters: "Portland, Oregon" },
-  { id: 4, name: "HP", headquarters: "Portland, Oregon" },
+  { id: 5, name: "HP", headquarters: "Portland, Oregon" },
 ]
 
 export const CompaniesPage = () => {
@@ -63,7 +63,9 @@ export const CompaniesPage = () => {
                 <Td>{row.headquarters}</Td>
                 <Td>
                   <div className={CompaniesPageCss.tableButtonContainer}>
-                    <Button variant={ButtonVariant.Blue}>update</Button>
+                    <NavLink to={`/companies/${row.id}`}>
+                      <Button variant={ButtonVariant.Blue}>update</Button>
+                    </NavLink>
                     <Button variant={ButtonVariant.Red}>delete</Button>
                   </div>
                 </Td>

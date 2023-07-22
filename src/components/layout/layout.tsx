@@ -14,9 +14,9 @@ export const Layout = ({ children }: Props) => {
   return (
     <div className={LayoutCss.page}>
       <TopNavBar />
-      <div className={LayoutCss.mainContainer}>
+      <div className={LayoutCss.contentContainer}>
         {isAuthenticated && <SideMenu />}
-        {children}
+        <main className={LayoutCss.mainContainer}>{children}</main>
       </div>
     </div>
   )

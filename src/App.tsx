@@ -1,10 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import { Route, Routes } from "react-router-dom"
 import { AuthenticationGuard } from "./auth/authentication-guard.tsx"
-import { ApplicationsPage } from "./routes/applications-page.tsx"
+import { ApplicationsPage } from "./routes/applications/applications-page.tsx"
 import { HomePage } from "./routes/home-page.tsx"
 import { ErrorPage } from "./error-page.tsx"
 import { CallbackPage } from "./routes/callback-page.tsx"
+import { CompaniesPage } from "./routes/companies/companies-page.tsx"
 
 function App() {
   const { isLoading } = useAuth0()
@@ -19,6 +20,10 @@ function App() {
       <Route
         path={"/applications"}
         element={<AuthenticationGuard component={ApplicationsPage} />}
+      />
+      <Route
+        path={"/companies"}
+        element={<AuthenticationGuard component={CompaniesPage} />}
       />
       <Route path={"/callback"} element={<CallbackPage />} />
       <Route path="*" element={<ErrorPage />} />

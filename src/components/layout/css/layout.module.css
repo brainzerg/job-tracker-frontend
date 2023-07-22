@@ -5,7 +5,12 @@
     flex-direction: column;
 }
 
-.mainContainer {
+.contentContainer {
     display: flex;
     flex: 1;
+}
+
+.mainContainer {
+    flex: 1;
+    padding: 10px 24px 0;
 }

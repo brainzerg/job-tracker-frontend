@@ -5,6 +5,8 @@ html, body, #root {
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -12,14 +14,32 @@ body {
 }
 
 body,
-h1, h2, h3, h4, h5, h6, p, a {
-    margin: 0;
-    padding: 0;
+h1, h2, h3, h4, h5, h6,
+p,
+a {
     font-weight: inherit;
     text-decoration: inherit;
     color: inherit;
 }
 
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    border: unset;
+    background: unset;
+}
+
 button {
     cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }

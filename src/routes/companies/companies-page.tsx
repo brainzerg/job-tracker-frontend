@@ -14,7 +14,6 @@ import CompaniesPageCss from "./css/companies.module.css"
 import { useEffect, useState } from "react"
 import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
-import { getCompaniesList } from "../../api/companies.ts"
 
 const mockData: Company[] = [
   { id: 1, name: "Walmart", headquarters: "Portland, Oregon" },

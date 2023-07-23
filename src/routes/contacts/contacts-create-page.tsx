@@ -1,16 +1,16 @@
+import { FormEventHandler } from "react"
 import { Button, ButtonVariant, Input, Title } from "../../components/common"
 import FormPageCss from "../../styles/common-css/form-page.module.css"
-import { FormEventHandler } from "react"
-import { useCompanyForm } from "../../components/companies/_hooks/use-company-form.ts"
+import { useContactsForm } from "../../components/contacts/_hooks/use-contacts-form.ts"
 
-export const CompaniesCreatePage = () => {
-  const { name, setName, headquarters, setHeadquarters } = useCompanyForm({})
+export const ContactsCreatePage = () => {
+  const { name, setName, phone, setPhone, setEmail } = useContactsForm({})
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
 
     // TODO: send data to server
-    console.log("name: ", name, "headquarters: ", headquarters)
+    console.log("name: ", name, "phone: ", phone)
   }
 
   return (
@@ -22,8 +22,16 @@ export const CompaniesCreatePage = () => {
           <Input onBlur={(e) => setName(e.target.value)} />
         </div>
         <div className={FormPageCss.inputRow}>
-          <p className={FormPageCss.inputRowLabel}>Headquarters</p>
-          <Input onBlur={(e) => setHeadquarters(e.target.value)} />
+          <p className={FormPageCss.inputRowLabel}>Email</p>
+          <Input onBlur={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className={FormPageCss.inputRow}>
+          <p className={FormPageCss.inputRowLabel}>Phone</p>
+          <Input onBlur={(e) => setPhone(e.target.value)} />
+        </div>
+        <div className={FormPageCss.inputRow}>
+          <p className={FormPageCss.inputRowLabel}>Company</p>
+          <div> select goes here </div>
         </div>
         <div className={FormPageCss.submitContainer}>
           <Button type={"submit"} variant={ButtonVariant.Green} width={100}>

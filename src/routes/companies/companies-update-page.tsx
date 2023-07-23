@@ -1,7 +1,7 @@
 import { useCompanyForm } from "../../components/companies/_hooks/use-company-form.ts"
 import { FormEventHandler, useEffect } from "react"
 import { Button, ButtonVariant, Input, Title } from "../../components/common"
-import CompanyCreatePageCss from "./css/companies-create.module.css"
+import FormPageCss from "../../styles/common-css/form-page.module.css"
 import { useParams } from "react-router-dom"
 
 type Params = {
@@ -9,7 +9,6 @@ type Params = {
 }
 
 export const CompaniesUpdatePage = () => {
-  const { name, setName, headquarters, setHeadquarters } = useCompanyForm({})
   const { companyId } = useParams<Params>()
 
   useEffect(() => {
@@ -18,6 +17,8 @@ export const CompaniesUpdatePage = () => {
       console.log("companyId:", companyId)
     }
   }, [companyId])
+
+  const { name, setName, headquarters, setHeadquarters } = useCompanyForm({})
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -29,16 +30,16 @@ export const CompaniesUpdatePage = () => {
   return (
     <div>
       <Title text={"Update A Company Entry"} />
-      <form className={CompanyCreatePageCss.formContainer} onSubmit={onSubmit}>
-        <div className={CompanyCreatePageCss.inputRow}>
-          <p className={CompanyCreatePageCss.inputRowLabel}>Name</p>
+      <form className={FormPageCss.formContainer} onSubmit={onSubmit}>
+        <div className={FormPageCss.inputRow}>
+          <p className={FormPageCss.inputRowLabel}>Name</p>
           <Input onBlur={(e) => setName(e.target.value)} />
         </div>
-        <div className={CompanyCreatePageCss.inputRow}>
-          <p className={CompanyCreatePageCss.inputRowLabel}>Headquarters</p>
+        <div className={FormPageCss.inputRow}>
+          <p className={FormPageCss.inputRowLabel}>Headquarters</p>
           <Input onBlur={(e) => setHeadquarters(e.target.value)} />
         </div>
-        <div className={CompanyCreatePageCss.submitContainer}>
+        <div className={FormPageCss.submitContainer}>
           <Button type={"submit"} variant={ButtonVariant.Green} width={100}>
             Update
           </Button>

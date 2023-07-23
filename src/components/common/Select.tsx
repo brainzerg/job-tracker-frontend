@@ -4,6 +4,7 @@ import SelectCss from "./css/select.module.css"
 export type SelectOption = {
   label: string
   value: string
+  disabled?: boolean
 }
 
 type Props = {
@@ -20,8 +21,8 @@ export const Select = ({ options = [], value, onChange }: Props) => {
   return (
     <div className={SelectCss.selectContainer}>
       <select value={value} onChange={handleChange}>
-        {options.map(({ label, value }) => (
-          <option key={value} value={value}>
+        {options.map(({ label, value, disabled }) => (
+          <option key={value} value={value} hidden={disabled}>
             {label}
           </option>
         ))}

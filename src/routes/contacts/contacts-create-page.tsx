@@ -9,8 +9,10 @@ import {
 } from "../../components/common"
 import FormPageCss from "../../styles/common-css/form-page.module.css"
 import { useContactsForm } from "../../components/contacts/_hooks/use-contacts-form.ts"
+import { defaultSelectOption } from "../../common/constants/select-option.ts"
 
 const mockData: SelectOption[] = [
+  defaultSelectOption,
   { value: "1", label: "Walmart" },
   { value: "2", label: "Nike" },
   { value: "3", label: "Tektronix" },

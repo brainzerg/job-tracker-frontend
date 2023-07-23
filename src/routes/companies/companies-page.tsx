@@ -10,7 +10,7 @@ import {
   Tr,
 } from "../../components/common"
 import { Company } from "../../common/types/company.ts"
-import CompaniesPageCss from "./css/companies.module.css"
+import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { useEffect, useState } from "react"
 import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
@@ -41,7 +41,7 @@ export const CompaniesPage = () => {
   return (
     <div>
       <Title text={"Companies"} />
-      <div className={CompaniesPageCss.tableHeader}>
+      <div className={TablePageCss.tableHeader}>
         <NavLink to={"/companies/new"}>
           <Button variant={ButtonVariant.Green}>create</Button>
         </NavLink>
@@ -63,7 +63,7 @@ export const CompaniesPage = () => {
                 <Td>{row.name}</Td>
                 <Td>{row.headquarters}</Td>
                 <Td>
-                  <div className={CompaniesPageCss.tableButtonContainer}>
+                  <div className={TablePageCss.tableButtonContainer}>
                     <NavLink to={`/companies/${row.id}`}>
                       <Button variant={ButtonVariant.Blue}>update</Button>
                     </NavLink>

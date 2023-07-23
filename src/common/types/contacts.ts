@@ -10,5 +10,5 @@ export type ContactsForm = {
   name: string
   email: string
   phone: string
-  companyId: number
+  companyId: string
 }

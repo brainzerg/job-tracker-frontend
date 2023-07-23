@@ -9,7 +9,7 @@ export const useContactsForm = ({ initialValue }: Props) => {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [phone, setPhone] = useState<string>("")
-  const [companyId, setCompanyId] = useState<number>()
+  const [companyId, setCompanyId] = useState<string>("")
 
   useEffect(() => {
     if (initialValue) {

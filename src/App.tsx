@@ -8,6 +8,9 @@ import { CallbackPage } from "./routes/callback-page.tsx"
 import { CompaniesPage } from "./routes/companies/companies-page.tsx"
 import { CompaniesCreatePage } from "./routes/companies/companies-create-page.tsx"
 import { CompaniesUpdatePage } from "./routes/companies/companies-update-page.tsx"
+import { ContactsCreatePage } from "./routes/contacts/contacts-create-page.tsx"
+import { ContactsUpdatePage } from "./routes/contacts/contacts-update-page.tsx"
+import { ContactsPage } from "./routes/contacts/contacts-page.tsx"
 
 function App() {
   const { isLoading } = useAuth0()
@@ -35,7 +38,18 @@ function App() {
         path={"/companies"}
         element={<AuthenticationGuard component={CompaniesPage} />}
       />
-
+      <Route
+        path={"/contacts/new"}
+        element={<AuthenticationGuard component={ContactsCreatePage} />}
+      />
+      <Route
+        path={"/contacts/:contactsId"}
+        element={<AuthenticationGuard component={ContactsUpdatePage} />}
+      />
+      <Route
+        path={"/contacts"}
+        element={<AuthenticationGuard component={ContactsPage} />}
+      />
       <Route path={"/callback"} element={<CallbackPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>

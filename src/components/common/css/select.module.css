@@ -1,0 +1,15 @@
+select {
+    width: 100%;
+    outline: none;
+    padding: 4px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+}
+
+select:focus {
+    border: 1px solid black;
+}
+
+.selectContainer {
+    width: 100%;
+}

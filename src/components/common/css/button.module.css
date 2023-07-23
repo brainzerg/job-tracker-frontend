@@ -1,3 +1,11 @@
+button {
+    transition-duration: 0.1s;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
 .blue {
     background-color: #4299E1;
     color: white;

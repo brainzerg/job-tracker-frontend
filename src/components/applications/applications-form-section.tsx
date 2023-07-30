@@ -71,7 +71,25 @@ export const ApplicationsFormSection = ({ onSubmit, initialValue }: Props) => {
       const data = await Promise.resolve(mockCompanyList)
       setCompanyList(data)
     }
+
+    async function getJobList() {
+      if (initialValue?.companyId) {
+        console.log(
+          "filtered list:",
+          mockJobList.filter((mockJob) => {
+            console.log("mock and actual id", mockJob, companyId)
+            return mockJob.companyId === +companyId
+          })
+        )
+        const data = await Promise.resolve(
+          mockJobList.filter((mockJob) => mockJob.companyId === +companyId)
+        )
+        setJobList(data)
+      }
+    }
+
     getCompanyList()
+    getJobList()
   }, [])
 
   useEffect(() => {

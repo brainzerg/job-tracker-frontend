@@ -1,7 +1,8 @@
 export type Application = {
   id: number
   applyDate: string
-  companyId: string
+  jobId: number
+  companyId: number
   companyName: string
   position: string
   startDate: string

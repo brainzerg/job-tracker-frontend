@@ -28,7 +28,8 @@ export const useApplicationsForm = ({ initialValue }: Props) => {
 
   useEffect(() => {
     if (initialValue) {
-      const { applyDate, status, companyId } = initialValue
+      const { applyDate, status, jobId, companyId } = initialValue
+      setApplicationFormField("jobId", jobId)
       setApplicationFormField("applyDate", applyDate)
       setApplicationFormField("status", status)
       setApplicationFormField("companyId", companyId)

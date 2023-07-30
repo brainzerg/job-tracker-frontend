@@ -14,6 +14,7 @@ import { ContactsPage } from "./routes/contacts/contacts-page.tsx"
 import { JobsPage } from "./routes/jobs/jobs-page.tsx"
 import { JobsCreatePage } from "./routes/jobs/jobs-create-page.tsx"
 import { JobsUpdatePage } from "./routes/jobs/jobs-update-page.tsx"
+import { ApplicationsCreatePage } from "./routes/applications/applications-create-page.tsx"
 
 function App() {
   const { isLoading } = useAuth0()
@@ -28,6 +29,10 @@ function App() {
       <Route
         path={"/applications"}
         element={<AuthenticationGuard component={ApplicationsPage} />}
+      />
+      <Route
+        path={"/applications/new"}
+        element={<AuthenticationGuard component={ApplicationsCreatePage} />}
       />
       <Route
         path={"/companies/new"}

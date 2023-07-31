@@ -16,6 +16,10 @@ import { JobsCreatePage } from "./routes/jobs/jobs-create-page.tsx"
 import { JobsUpdatePage } from "./routes/jobs/jobs-update-page.tsx"
 import { ApplicationsCreatePage } from "./routes/applications/applications-create-page.tsx"
 import { ApplicationsUpdatePage } from "./routes/applications/applications-update-page.tsx"
+import { SkillsPage } from "./routes/skills/skills-page.tsx"
+import { SkillsCreatePage } from "./routes/skills/skills-create-page.tsx"
+import { SkillsUpdatePage } from "./routes/skills/skills-update-page.tsx"
+
 
 function App() {
   const { isLoading } = useAuth0()
@@ -74,6 +78,18 @@ function App() {
       <Route
         path={"/jobs"}
         element={<AuthenticationGuard component={JobsPage} />}
+      />
+      <Route
+        path={"/skills/new"}
+        element={<AuthenticationGuard component={SkillsCreatePage} />}
+      />
+      <Route
+        path={"/skills/:companyId"}
+        element={<AuthenticationGuard component={SkillsUpdatePage} />}
+      />
+      <Route
+        path={"/skills"}
+        element={<AuthenticationGuard component={SkillsPage} />}
       />
       <Route path={"/callback"} element={<CallbackPage />} />
       <Route path="*" element={<ErrorPage />} />

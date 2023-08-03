@@ -1,7 +1,7 @@
 import { api } from "./config.ts"
 import { Skill, SkillForm } from "../common/types/skill.ts"
 
-const url = "/api/companies"
+const url = "/api/skills"
 
 export const getSkillsList = async () => {
   const response = await api.get<Skill[]>(url)

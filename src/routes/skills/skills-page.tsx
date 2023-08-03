@@ -14,7 +14,9 @@ import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { useEffect, useState } from "react"
 import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
+import { getSkillsList } from "../../api/skills.ts"
 
+/*
 const mockData: Skill[] = [
   { id: 1, name: "Java", proficiency: "beginner" },
   { id: 2, name: "C++", proficiency: "intermediate" },
@@ -22,20 +24,17 @@ const mockData: Skill[] = [
   { id: 4, name: "React", proficiency: "intermediate" },
   { id: 5, name: "NodeJS", proficiency: "beginner" },
 ]
+*/
 
 export const SkillsPage = () => {
   const [skills, setSkills] = useState<Skill[]>([])
 
   useEffect(() => {
-    async function getSkills() {
-      // TODO: replace mockData with data from API
-      // const data = await getSkillsList()
-      const data = await Promise.resolve(mockData)
-      setSkills(data)
-      return data
+    async function setup() {
+      const skillsList = await getSkillsList()
+      setSkills(skillsList)
     }
-
-    getSkills()
+    setup()
   }, [])
 
   return (
@@ -57,7 +56,6 @@ export const SkillsPage = () => {
             </Tr>
           </Thead>
           <tbody>
-            {/* TODO: Mock data here for now. Replace with data from server */}
             {skills.map((row) => (
               <Tr key={row.id}>
                 <Td>{row.name}</Td>

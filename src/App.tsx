@@ -19,10 +19,19 @@ import { ApplicationsUpdatePage } from "./routes/applications/applications-updat
 import { SkillsPage } from "./routes/skills/skills-page.tsx"
 import { SkillsCreatePage } from "./routes/skills/skills-create-page.tsx"
 import { SkillsUpdatePage } from "./routes/skills/skills-update-page.tsx"
-
+import { useEffect } from "react"
+import { setAccessToken } from "./api/config.ts"
 
 function App() {
-  const { isLoading } = useAuth0()
+  const { isLoading, getAccessTokenSilently } = useAuth0()
+
+  useEffect(() => {
+    async function setup() {
+      const theToken = await getAccessTokenSilently()
+      setAccessToken(theToken)
+    }
+    setup()
+  }, [])
 
   if (isLoading) {
     return <div>Loading...</div>

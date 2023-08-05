@@ -15,16 +15,6 @@ import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { deleteSkill, getSkillsList } from "../../api/skills.ts"
 
-/*
-const mockData: Skill[] = [
-  { id: 1, name: "Java", proficiency: "beginner" },
-  { id: 2, name: "C++", proficiency: "intermediate" },
-  { id: 3, name: "C", proficiency: "advanced" },
-  { id: 4, name: "React", proficiency: "intermediate" },
-  { id: 5, name: "NodeJS", proficiency: "beginner" },
-]
-*/
-
 export const SkillsPage = () => {
   const [skills, setSkills] = useState<Skill[]>([])
 

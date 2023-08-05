@@ -14,16 +14,22 @@ import {
 import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { NavLink } from "react-router-dom"
 import { Pagination } from "../../components/common/Pagination.tsx"
-import { getJobsList } from "../../api/jobs.ts"
+import { deleteJob, getJobsList } from "../../api/jobs.ts"
 
 export const JobsPage = () => {
   const [jobs, setJobs] = useState<Job[]>([])
 
+  const getJobsFromApi = async () => {
+    const data = await getJobsList()
+    setJobs(data)
+  }
+
+  const onClickDelete = async (jobId: number) => {
+    await deleteJob(jobId)
+    getJobsFromApi()
+  }
+
   useEffect(() => {
-    async function getJobsFromApi() {
-      const data = await getJobsList()
-      setJobs(data)
-    }
     getJobsFromApi()
   }, [])
 
@@ -61,7 +67,12 @@ export const JobsPage = () => {
                     <NavLink to={`/jobs/${row.id}`}>
                       <Button variant={ButtonVariant.Blue}>update</Button>
                     </NavLink>
-                    <Button variant={ButtonVariant.Red}>delete</Button>
+                    <Button
+                      variant={ButtonVariant.Red}
+                      onClick={() => onClickDelete(row.id)}
+                    >
+                      delete
+                    </Button>
                   </div>
                 </Td>
               </Tr>

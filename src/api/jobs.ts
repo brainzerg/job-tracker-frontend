@@ -27,8 +27,8 @@ export const deleteJob = async (id: number) => {
   return response.data
 }
 
-export const updateJob = async (payload: Job) => {
-  const response = await api.put<Job>(url, payload)
+export const updateJob = async (payload: JobForm) => {
+  const response = await api.put<Job>(url + "/" + payload.id, payload)
 
   return response.data
 }

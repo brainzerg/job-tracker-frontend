@@ -6,7 +6,7 @@ export type Job = {
   position: string
   salary: string
   location: string
-  skills: string[] | null
+  skills: string
 }
 
 export type JobForm = {

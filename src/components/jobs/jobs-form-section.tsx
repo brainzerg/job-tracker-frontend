@@ -4,20 +4,12 @@ import { Job, JobForm } from "../../common/types/jobs.ts"
 import { FormEventHandler, useEffect, useState } from "react"
 import { Company } from "../../common/types/company.ts"
 import { useJobsForm } from "./_hooks/use-jobs-form.ts"
+import { getCompaniesList } from "../../api/companies.ts"
 
 type Props = {
   initialValue?: Job
   onSubmit: (jobForm: JobForm) => void
 }
-
-// TODO: replace this with an api call
-const mockCompanyList: Company[] = [
-  { id: 1, name: "Walmart", headqtrs: "Portland, Oregon" },
-  { id: 2, name: "Nike", headqtrs: "Portland, Oregon" },
-  { id: 3, name: "Tektronix", headqtrs: "Portland, Oregon" },
-  { id: 4, name: "Garmin", headqtrs: "Portland, Oregon" },
-  { id: 5, name: "HP", headqtrs: "Portland, Oregon" },
-]
 
 export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
   const [companyList, setCompanyList] = useState<Company[]>([])
@@ -27,13 +19,13 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
     jobForm: { id, skills, position, location, companyId, salary, startdate },
   } = useJobsForm({ initialValue })
 
-  useEffect(() => {
-    async function getCompanyList() {
-      const data = await Promise.resolve(mockCompanyList)
-      setCompanyList(data)
-    }
+  async function fetchCompaniesList() {
+    const data = await getCompaniesList()
+    setCompanyList(data)
+  }
 
-    getCompanyList()
+  useEffect(() => {
+    fetchCompaniesList()
   }, [])
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -45,7 +37,7 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
       position,
       id,
       skills,
-      startdate: startDate,
+      startdate,
     })
   }
 
@@ -66,6 +58,7 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Company</p>
         <Select
+          disabled={!!initialValue}
           options={companyOptionList}
           onChange={(theCompanyId) =>
             setJobFormField("companyId", theCompanyId)

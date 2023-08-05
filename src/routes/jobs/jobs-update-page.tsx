@@ -1,48 +1,42 @@
 import { useEffect, useState } from "react"
 import { Title } from "../../components/common"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Job, JobForm } from "../../common/types/jobs.ts"
 import { JobsFormSection } from "../../components/jobs/jobs-form-section.tsx"
+import { getJobById, updateJob } from "../../api/jobs.ts"
 
 type Params = {
   jobId: string
 }
 
-const mockData = {
-  id: 1,
-  salary: "$10,000",
-  location: "Alaska",
-  position: "SE 1",
-  companyId: 2,
-  companyName: "Alaska State",
-  startDate: "2023-09-01",
-  skills: ["C", "C++"],
-}
-
 export const JobsUpdatePage = () => {
-  const [updateJob, setUpdateJob] = useState<Job | undefined>()
+  const [jobToUpdate, setJobToUpdate] = useState<Job | undefined>()
+
+  const navigate = useNavigate()
+
   const { jobId } = useParams<Params>()
+
+  const getJob = async () => {
+    const job = await getJobById(Number(jobId))
+    setJobToUpdate(job)
+  }
 
   useEffect(() => {
     if (jobId) {
-      // TODO: fetch company info and setUpdateJob
-      console.log("jobId:", jobId)
-      setTimeout(() => {
-        setUpdateJob(mockData)
-      }, 1000)
+      getJob()
     }
   }, [jobId])
 
-  const onSubmit = (s: JobForm) => {
-    // TODO: send update data to server
-    console.log(s)
+  const onSubmit = async (jobForm: JobForm) => {
+    await updateJob(jobForm)
+    navigate("/jobs")
   }
 
   return (
     <div>
       <Title text={"Update A Job Entry"} />
-      {updateJob && (
-        <JobsFormSection onSubmit={onSubmit} initialValue={updateJob} />
+      {jobToUpdate && (
+        <JobsFormSection onSubmit={onSubmit} initialValue={jobToUpdate} />
       )}
     </div>
   )

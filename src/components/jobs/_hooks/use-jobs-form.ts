@@ -34,7 +34,7 @@ export const useJobsForm = ({ initialValue }: Props) => {
         startdate,
         salary,
         location,
-        skills: skills.join(","),
+        skills,
         companyId: String(companyId),
         position,
         id: String(id),

@@ -5,6 +5,7 @@ export type Skill = {
 }
 
 export type SkillForm = {
+  skillId?: number
   name: string
   proficiency: string
 }

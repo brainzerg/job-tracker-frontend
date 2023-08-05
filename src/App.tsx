@@ -93,7 +93,7 @@ function App() {
         element={<AuthenticationGuard component={SkillsCreatePage} />}
       />
       <Route
-        path={"/skills/:companyId"}
+        path={"/skills/:skillId"}
         element={<AuthenticationGuard component={SkillsUpdatePage} />}
       />
       <Route

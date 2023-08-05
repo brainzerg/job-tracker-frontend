@@ -2,15 +2,18 @@ import { Button, ButtonVariant, Input, Title } from "../../components/common"
 import FormPageCss from "../../styles/common-css/form-page.module.css"
 import { FormEventHandler } from "react"
 import { useSkillsForm } from "../../components/skills/_hooks/use-skills-form.ts"
+import { createSkill } from "../../api/skills.ts"
+import { useNavigate } from "react-router-dom"
 
 export const SkillsCreatePage = () => {
   const { name, setName, proficiency, setProficiency } = useSkillsForm({})
+  const navigate = useNavigate()
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
-    // TODO: send data to server
-    console.log("name: ", name, "proficiency: ", proficiency)
+    await createSkill({ name, proficiency })
+    navigate("/skills")
   }
 
   return (

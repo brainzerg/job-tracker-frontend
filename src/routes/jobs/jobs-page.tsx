@@ -14,57 +14,14 @@ import {
 import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { NavLink } from "react-router-dom"
 import { Pagination } from "../../components/common/Pagination.tsx"
-
-const mockData: Job[] = [
-  {
-    id: 1,
-    salary: "$10,000",
-    location: "Alaska",
-    position: "SE 1",
-    companyId: 1,
-    companyName: "Alaska State",
-    startDate: "2023-09-01",
-    skills: ["C", "C++"],
-  },
-  {
-    id: 2,
-    salary: "$10,000",
-    location: "Portland",
-    position: "SE 2",
-    companyId: 1,
-    companyName: "Alaska State",
-    startDate: "2023-09-01",
-    skills: ["Java"],
-  },
-  {
-    id: 3,
-    salary: "$10,000",
-    location: "NYC",
-    position: "SE 3",
-    companyId: 1,
-    companyName: "Alaska State",
-    startDate: "2023-09-01",
-    skills: ["Javascript", "React"],
-  },
-  {
-    id: 4,
-    salary: "$10,000",
-    location: "Toronto",
-    position: "SE 3",
-    companyId: 1,
-    companyName: "Alaska State",
-    startDate: "2023-09-01",
-    skills: ["Javascript", "React", "Express"],
-  },
-]
+import { getJobsList } from "../../api/jobs.ts"
 
 export const JobsPage = () => {
   const [jobs, setJobs] = useState<Job[]>([])
 
   useEffect(() => {
     async function getJobsFromApi() {
-      // TODO: replace with an API call that returns the list of jobs
-      const data = await Promise.resolve(mockData)
+      const data = await getJobsList()
       setJobs(data)
     }
     getJobsFromApi()
@@ -94,7 +51,7 @@ export const JobsPage = () => {
           <tbody>
             {jobs.map((row) => (
               <Tr key={row.id}>
-                <Td>{row.startDate}</Td>
+                <Td>{row.startdate}</Td>
                 <Td>{row.companyName}</Td>
                 <Td>{row.position}</Td>
                 <Td>{row.salary}</Td>

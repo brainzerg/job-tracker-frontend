@@ -14,28 +14,23 @@ import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { useEffect, useState } from "react"
 import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
-
-const mockData: Company[] = [
-  { id: 1, name: "Walmart", headquarters: "Portland, Oregon" },
-  { id: 2, name: "Nike", headquarters: "Portland, Oregon" },
-  { id: 3, name: "Tektronix", headquarters: "Portland, Oregon" },
-  { id: 4, name: "Garmin", headquarters: "Portland, Oregon" },
-  { id: 5, name: "HP", headquarters: "Portland, Oregon" },
-]
+import { deleteCompany, getCompaniesList } from "../../api/companies.ts"
 
 export const CompaniesPage = () => {
   const [companies, setCompanies] = useState<Company[]>([])
 
-  useEffect(() => {
-    async function getCompanies() {
-      // TODO: replace mockData with data from API
-      // const data = await getCompaniesList()
-      const data = await Promise.resolve(mockData)
-      setCompanies(data)
-      return data
-    }
+  const fetchCompaniesList = async () => {
+    const data = await getCompaniesList()
+    setCompanies(data)
+  }
 
-    getCompanies()
+  const onClickDelete = async (companyId: number) => {
+    await deleteCompany(companyId)
+    fetchCompaniesList()
+  }
+
+  useEffect(() => {
+    fetchCompaniesList()
   }, [])
 
   return (
@@ -57,17 +52,21 @@ export const CompaniesPage = () => {
             </Tr>
           </Thead>
           <tbody>
-            {/* TODO: Mock data here for now. Replace with data from server */}
             {companies.map((row) => (
               <Tr key={row.id}>
                 <Td>{row.name}</Td>
-                <Td>{row.headquarters}</Td>
+                <Td>{row.headqtrs}</Td>
                 <Td>
                   <div className={TablePageCss.tableButtonContainer}>
                     <NavLink to={`/companies/${row.id}`}>
                       <Button variant={ButtonVariant.Blue}>update</Button>
                     </NavLink>
-                    <Button variant={ButtonVariant.Red}>delete</Button>
+                    <Button
+                      variant={ButtonVariant.Red}
+                      onClick={() => onClickDelete(row.id)}
+                    >
+                      delete
+                    </Button>
                   </div>
                 </Td>
               </Tr>

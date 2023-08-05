@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { SkillForm } from "../../../common/types/skill.ts"
+import { Skill } from "../../../common/types/skill.ts"
 
 type Props = {
-  initialValue?: SkillForm
+  initialValue?: Skill
 }
 
 export const useSkillsForm = ({ initialValue }: Props) => {

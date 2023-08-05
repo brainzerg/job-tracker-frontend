@@ -8,11 +8,13 @@ type Props = {
 export const useCompanyForm = ({ initialValue }: Props) => {
   const [name, setName] = useState<string>("")
   const [headquarters, setHeadquarters] = useState<string>("")
+  const [products, setProducts] = useState<string>("")
 
   useEffect(() => {
     if (initialValue) {
       setName(initialValue.name)
-      setHeadquarters(initialValue.headquarters)
+      setHeadquarters(initialValue.headqtrs)
+      setProducts(initialValue.products)
     }
   }, [initialValue])
 
@@ -21,5 +23,7 @@ export const useCompanyForm = ({ initialValue }: Props) => {
     setName,
     headquarters,
     setHeadquarters,
+    products,
+    setProducts,
   }
 }

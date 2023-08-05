@@ -1,10 +1,13 @@
 export type Company = {
   id: number
   name: string
-  headquarters: string
+  products: string
+  headqtrs: string
 }
 
 export type CompanyForm = {
+  id?: number
   name: string
-  headquarters: string
+  products: string
+  headqtrs: string
 }

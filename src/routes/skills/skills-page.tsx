@@ -14,7 +14,7 @@ import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { useEffect, useState } from "react"
 import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
-import { getSkillsList } from "../../api/skills.ts"
+import { deleteSkill, getSkillsList } from "../../api/skills.ts"
 
 /*
 const mockData: Skill[] = [
@@ -29,12 +29,18 @@ const mockData: Skill[] = [
 export const SkillsPage = () => {
   const [skills, setSkills] = useState<Skill[]>([])
 
+  const fetchSkillsList = async () => {
+    const skillsList = await getSkillsList()
+    setSkills(skillsList)
+  }
+
+  const onClickDelete = async (skillId: number) => {
+    await deleteSkill(skillId)
+    fetchSkillsList()
+  }
+
   useEffect(() => {
-    async function setup() {
-      const skillsList = await getSkillsList()
-      setSkills(skillsList)
-    }
-    setup()
+    fetchSkillsList()
   }, [])
 
   return (
@@ -65,7 +71,12 @@ export const SkillsPage = () => {
                     <NavLink to={`/skills/${row.id}`}>
                       <Button variant={ButtonVariant.Blue}>update</Button>
                     </NavLink>
-                    <Button variant={ButtonVariant.Red}>delete</Button>
+                    <Button
+                      variant={ButtonVariant.Red}
+                      onClick={() => onClickDelete(row.id)}
+                    >
+                      delete
+                    </Button>
                   </div>
                 </Td>
               </Tr>

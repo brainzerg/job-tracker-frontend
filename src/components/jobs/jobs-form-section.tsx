@@ -12,11 +12,11 @@ type Props = {
 
 // TODO: replace this with an api call
 const mockCompanyList: Company[] = [
-  { id: 1, name: "Walmart", headquarters: "Portland, Oregon" },
-  { id: 2, name: "Nike", headquarters: "Portland, Oregon" },
-  { id: 3, name: "Tektronix", headquarters: "Portland, Oregon" },
-  { id: 4, name: "Garmin", headquarters: "Portland, Oregon" },
-  { id: 5, name: "HP", headquarters: "Portland, Oregon" },
+  { id: 1, name: "Walmart", headqtrs: "Portland, Oregon" },
+  { id: 2, name: "Nike", headqtrs: "Portland, Oregon" },
+  { id: 3, name: "Tektronix", headqtrs: "Portland, Oregon" },
+  { id: 4, name: "Garmin", headqtrs: "Portland, Oregon" },
+  { id: 5, name: "HP", headqtrs: "Portland, Oregon" },
 ]
 
 export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
@@ -24,7 +24,7 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
 
   const {
     setJobFormField,
-    jobForm: { id, skills, position, location, companyId, salary, startDate },
+    jobForm: { id, skills, position, location, companyId, salary, startdate },
   } = useJobsForm({ initialValue })
 
   useEffect(() => {
@@ -38,7 +38,15 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    onSubmit({ salary, location, companyId, position, id, skills, startDate })
+    onSubmit({
+      salary,
+      location,
+      companyId,
+      position,
+      id,
+      skills,
+      startdate: startDate,
+    })
   }
 
   const companyOptionList: SelectOption[] = companyList.map((company) => ({
@@ -51,8 +59,8 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Start Date</p>
         <Input
-          initialValue={startDate}
-          onBlur={(e) => setJobFormField("startDate", e.target.value)}
+          initialValue={startdate}
+          onBlur={(e) => setJobFormField("startdate", e.target.value)}
         />
       </div>
       <div className={FormPageCss.inputRow}>

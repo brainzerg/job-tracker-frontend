@@ -27,8 +27,8 @@ export const deleteCompany = async (id: number) => {
   return response.data
 }
 
-export const updateCompany = async (payload: Company) => {
-  const response = await api.put<Company>(url, payload)
+export const updateCompany = async (payload: CompanyForm) => {
+  const response = await api.put<CompanyForm>(url + "/" + payload.id, payload)
 
   return response.data
 }

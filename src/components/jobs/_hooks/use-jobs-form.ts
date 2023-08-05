@@ -11,7 +11,7 @@ export const useJobsForm = ({ initialValue }: Props) => {
     position: "",
     location: "",
     companyId: "",
-    startDate: "",
+    startdate: "",
     salary: "",
     id: "",
   })
@@ -28,10 +28,10 @@ export const useJobsForm = ({ initialValue }: Props) => {
 
   useEffect(() => {
     if (initialValue) {
-      const { id, startDate, companyId, position, salary, location, skills } =
+      const { id, startdate, companyId, position, salary, location, skills } =
         initialValue
       setJobForm({
-        startDate,
+        startdate,
         salary,
         location,
         skills: skills.join(","),

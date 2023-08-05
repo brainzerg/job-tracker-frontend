@@ -16,11 +16,11 @@ type Props = {
 
 // TODO: replace this with an api call
 const mockCompanyList: Company[] = [
-  { id: 1, name: "Walmart", headquarters: "Portland, Oregon" },
-  { id: 2, name: "Nike", headquarters: "Portland, Oregon" },
-  { id: 3, name: "Tektronix", headquarters: "Portland, Oregon" },
-  { id: 4, name: "Garmin", headquarters: "Portland, Oregon" },
-  { id: 5, name: "HP", headquarters: "Portland, Oregon" },
+  { id: 1, name: "Walmart", headqtrs: "Portland, Oregon" },
+  { id: 2, name: "Nike", headqtrs: "Portland, Oregon" },
+  { id: 3, name: "Tektronix", headqtrs: "Portland, Oregon" },
+  { id: 4, name: "Garmin", headqtrs: "Portland, Oregon" },
+  { id: 5, name: "HP", headqtrs: "Portland, Oregon" },
 ]
 
 const mockJobList: Job[] = [
@@ -28,7 +28,7 @@ const mockJobList: Job[] = [
     id: 1,
     skills: ["C++", "Java"],
     position: "SE 1",
-    startDate: "2023-09-01",
+    startdate: "2023-09-01",
     companyId: 3,
     location: "Portland, Oregon",
     salary: "$80,000",
@@ -38,7 +38,7 @@ const mockJobList: Job[] = [
     id: 2,
     skills: ["Python", "Java"],
     position: "SE II",
-    startDate: "2023-09-02",
+    startdate: "2023-09-02",
     companyId: 2,
     location: "Portland, Oregon",
     salary: "$100,000",
@@ -48,7 +48,7 @@ const mockJobList: Job[] = [
     id: 3,
     skills: ["Javascript", "React"],
     position: "SE 3",
-    startDate: "2023-10-01",
+    startdate: "2023-10-01",
     companyId: 2,
     location: "Seattle, Washington",
     salary: "$120,000",

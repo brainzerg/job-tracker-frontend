@@ -1,30 +1,43 @@
-import { useSkillsForm} from "../../components/skills/_hooks/use-skills-form.ts"
-import { FormEventHandler, useEffect } from "react"
+import { useSkillsForm } from "../../components/skills/_hooks/use-skills-form.ts"
+import { FormEventHandler, useEffect, useState } from "react"
 import { Button, ButtonVariant, Input, Title } from "../../components/common"
 import FormPageCss from "../../styles/common-css/form-page.module.css"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { getSkillById, updateSkill } from "../../api/skills.ts"
+import { Skill } from "../../common/types/skill.ts"
 
 type Params = {
-  companyId: string
+  skillId: string
 }
 
 export const SkillsUpdatePage = () => {
-  const { companyId } = useParams<Params>()
+  const { skillId } = useParams<Params>()
+  const [skillToEdit, setSkillToEdit] = useState<Skill | undefined>()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (companyId) {
-      // TODO: fetch company info
-      console.log("companyId:", companyId)
+    if (skillId) {
+      async function fetchSkill() {
+        const skill = await getSkillById(Number(skillId))
+        setSkillToEdit(skill)
+      }
+
+      fetchSkill()
     }
-  }, [companyId])
+  }, [skillId])
 
-  const { name, setName, proficiency, setProficiency } = useSkillsForm({})
+  const { name, setName, proficiency, setProficiency } = useSkillsForm({
+    initialValue: skillToEdit,
+  })
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
-    // TODO: send data to server
-    console.log("name: ", name, "proficiency: ", proficiency)
+    console.log("skillid:", skillId)
+
+    await updateSkill({ skillId: Number(skillId), name, proficiency })
+    navigate("/skills")
   }
 
   return (
@@ -33,11 +46,14 @@ export const SkillsUpdatePage = () => {
       <form className={FormPageCss.formContainer} onSubmit={onSubmit}>
         <div className={FormPageCss.inputRow}>
           <p className={FormPageCss.inputRowLabel}>Name</p>
-          <Input onBlur={(e) => setName(e.target.value)} />
+          <Input initialValue={name} onBlur={(e) => setName(e.target.value)} />
         </div>
         <div className={FormPageCss.inputRow}>
           <p className={FormPageCss.inputRowLabel}>Proficiency</p>
-          <Input onBlur={(e) => setProficiency(e.target.value)} />
+          <Input
+            initialValue={proficiency}
+            onBlur={(e) => setProficiency(e.target.value)}
+          />
         </div>
         <div className={FormPageCss.submitContainer}>
           <Button type={"submit"} variant={ButtonVariant.Green} width={100}>

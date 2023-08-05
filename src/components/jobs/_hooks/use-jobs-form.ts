@@ -10,10 +10,9 @@ export const useJobsForm = ({ initialValue }: Props) => {
     skills: "",
     position: "",
     location: "",
-    companyId: "",
+    companyId: 0,
     startdate: "",
     salary: "",
-    id: "",
   })
 
   const setJobFormField = (
@@ -35,9 +34,9 @@ export const useJobsForm = ({ initialValue }: Props) => {
         salary,
         location,
         skills,
-        companyId: String(companyId),
+        companyId: companyId,
         position,
-        id: String(id),
+        id,
       })
     }
   }, [initialValue])

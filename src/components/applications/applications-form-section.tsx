@@ -8,53 +8,13 @@ import {
   ApplicationForm,
 } from "../../common/types/applications.ts"
 import { useApplicationsForm } from "./_hooks/use-applications-form.ts"
+import { getCompaniesList } from "../../api/companies.ts"
+import { getJobsFromCompany } from "../../api/jobs.ts"
 
 type Props = {
   onSubmit: (applicationForm: ApplicationForm) => void
   initialValue?: Application
 }
-
-// TODO: replace this with an api call
-const mockCompanyList: Company[] = [
-  { id: 1, name: "Walmart", headqtrs: "Portland, Oregon" },
-  { id: 2, name: "Nike", headqtrs: "Portland, Oregon" },
-  { id: 3, name: "Tektronix", headqtrs: "Portland, Oregon" },
-  { id: 4, name: "Garmin", headqtrs: "Portland, Oregon" },
-  { id: 5, name: "HP", headqtrs: "Portland, Oregon" },
-]
-
-const mockJobList: Job[] = [
-  {
-    id: 1,
-    skills: ["C++", "Java"],
-    position: "SE 1",
-    startdate: "2023-09-01",
-    companyId: 3,
-    location: "Portland, Oregon",
-    salary: "$80,000",
-    companyName: "Nike",
-  },
-  {
-    id: 2,
-    skills: ["Python", "Java"],
-    position: "SE II",
-    startdate: "2023-09-02",
-    companyId: 2,
-    location: "Portland, Oregon",
-    salary: "$100,000",
-    companyName: "Walmart",
-  },
-  {
-    id: 3,
-    skills: ["Javascript", "React"],
-    position: "SE 3",
-    startdate: "2023-10-01",
-    companyId: 2,
-    location: "Seattle, Washington",
-    salary: "$120,000",
-    companyName: "Microsoft",
-  },
-]
 
 export const ApplicationsFormSection = ({ onSubmit, initialValue }: Props) => {
   const [companyList, setCompanyList] = useState<Company[]>([])
@@ -64,48 +24,33 @@ export const ApplicationsFormSection = ({ onSubmit, initialValue }: Props) => {
     initialValue,
   })
 
-  const { applyDate, companyId, jobId, status } = applicationForm
+  const { applydate, companyId, jobId, status } = applicationForm
+
+  const isUpdate = !!initialValue
+
+  const initCompanyList = async () => {
+    const data = await getCompaniesList()
+    setCompanyList(data)
+    setApplicationFormField("companyId", data[0].id)
+  }
 
   useEffect(() => {
-    async function getCompanyList() {
-      const data = await Promise.resolve(mockCompanyList)
-      setCompanyList(data)
+    if (!isUpdate) {
+      initCompanyList()
     }
-
-    async function getJobList() {
-      if (initialValue?.companyId) {
-        console.log(
-          "filtered list:",
-          mockJobList.filter((mockJob) => {
-            console.log("mock and actual id", mockJob, companyId)
-            return mockJob.companyId === +companyId
-          })
-        )
-        const data = await Promise.resolve(
-          mockJobList.filter((mockJob) => mockJob.companyId === +companyId)
-        )
-        setJobList(data)
-      }
-    }
-
-    getCompanyList()
-    getJobList()
   }, [])
+
+  const initJobList = async () => {
+    if (companyId) {
+      const data = await getJobsFromCompany(companyId)
+      setJobList(data)
+      setApplicationFormField("jobId", data[0]?.id || 0)
+    }
+  }
 
   useEffect(() => {
     if (companyId) {
-      async function getJobList() {
-        setTimeout(async () => {
-          const data = await Promise.resolve(
-            mockJobList.filter(
-              (mockJob) => String(mockJob.companyId) === companyId
-            )
-          )
-          setJobList(data)
-        }, 500)
-      }
-
-      getJobList()
+      initJobList()
     }
   }, [companyId])
 
@@ -128,27 +73,33 @@ export const ApplicationsFormSection = ({ onSubmit, initialValue }: Props) => {
     <form className={FormPageCss.formContainer} onSubmit={handleSubmit}>
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Company</p>
-        <Select
-          options={companyOptionList}
-          onChange={(theCompanyId) =>
-            setApplicationFormField("companyId", theCompanyId)
-          }
-          value={companyId}
-        />
+        {isUpdate && <Input value={initialValue.companyName} disabled />}
+        {!isUpdate && (
+          <Select
+            options={companyOptionList}
+            onChange={(theCompanyId) =>
+              setApplicationFormField("companyId", +theCompanyId)
+            }
+            value={companyId}
+          />
+        )}
       </div>
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Job</p>
-        <Select
-          options={jobOptionList}
-          onChange={(theJobId) => setApplicationFormField("jobId", theJobId)}
-          value={jobId}
-        />
+        {isUpdate && <Input value={initialValue.position} disabled />}
+        {!isUpdate && (
+          <Select
+            options={jobOptionList}
+            onChange={(theJobId) => setApplicationFormField("jobId", +theJobId)}
+            value={jobId}
+          />
+        )}
       </div>
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Apply Date</p>
         <Input
-          initialValue={applyDate}
-          onBlur={(e) => setApplicationFormField("applyDate", e.target.value)}
+          initialValue={applydate}
+          onBlur={(e) => setApplicationFormField("applydate", e.target.value)}
         />
       </div>
       <div className={FormPageCss.inputRow}>

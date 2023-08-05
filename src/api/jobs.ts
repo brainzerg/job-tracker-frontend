@@ -32,3 +32,11 @@ export const updateJob = async (payload: JobForm) => {
 
   return response.data
 }
+
+export const getJobsFromCompany = async (companyId: number) => {
+  const response = await api.get<Job[]>(url + "/jobs-from-company", {
+    params: { companyId },
+  })
+
+  return response.data
+}

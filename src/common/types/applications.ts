@@ -1,18 +1,18 @@
 export type Application = {
   id: number
-  applyDate: string
+  applydate: string
   jobId: number
   companyId: number
   companyName: string
   position: string
-  startDate: string
+  startdate: string
   status: string
 }
 
 export type ApplicationForm = {
   id?: number
-  applyDate: string
-  companyId: string
-  jobId: string
+  applydate: string
+  companyId: number
+  jobId: number
   status: string
 }

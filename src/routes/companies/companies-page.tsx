@@ -12,7 +12,6 @@ import {
 import { Company } from "../../common/types/company.ts"
 import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { useEffect, useState } from "react"
-import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
 import { deleteCompany, getCompaniesList } from "../../api/companies.ts"
 
@@ -40,7 +39,6 @@ export const CompaniesPage = () => {
         <NavLink to={"/companies/new"}>
           <Button variant={ButtonVariant.Green}>create</Button>
         </NavLink>
-        <Pagination />
       </div>
       <TableContainer>
         <Table>

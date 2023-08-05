@@ -10,9 +10,9 @@ export type Job = {
 }
 
 export type JobForm = {
-  id?: string
+  id?: number
   startdate: string
-  companyId: string
+  companyId: number
   position: string
   salary: string
   location: string

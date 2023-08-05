@@ -14,6 +14,8 @@ type Props = {
 export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
   const [companyList, setCompanyList] = useState<Company[]>([])
 
+  const isUpdate = !!initialValue
+
   const {
     setJobFormField,
     jobForm: { id, skills, position, location, companyId, salary, startdate },
@@ -22,10 +24,13 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
   async function fetchCompaniesList() {
     const data = await getCompaniesList()
     setCompanyList(data)
+    setJobFormField("companyId", data[0].id)
   }
 
   useEffect(() => {
-    fetchCompaniesList()
+    if (!isUpdate) {
+      fetchCompaniesList()
+    }
   }, [])
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -57,14 +62,17 @@ export const JobsFormSection = ({ onSubmit, initialValue }: Props) => {
       </div>
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Company</p>
-        <Select
-          disabled={!!initialValue}
-          options={companyOptionList}
-          onChange={(theCompanyId) =>
-            setJobFormField("companyId", theCompanyId)
-          }
-          value={companyId}
-        />
+        {isUpdate && <Input value={initialValue.companyName} disabled />}
+        {!isUpdate && (
+          <Select
+            disabled={!!initialValue}
+            options={companyOptionList}
+            onChange={(theCompanyId) =>
+              setJobFormField("companyId", +theCompanyId)
+            }
+            value={companyId}
+          />
+        )}
       </div>
       <div className={FormPageCss.inputRow}>
         <p className={FormPageCss.inputRowLabel}>Position</p>

@@ -1,72 +1,41 @@
-import { useParams } from "react-router-dom"
-import { FormEventHandler, useEffect } from "react"
-import {
-  Button,
-  ButtonVariant,
-  Input,
-  Select,
-  SelectOption,
-  Title,
-} from "../../components/common"
-import FormPageCss from "../../styles/common-css/form-page.module.css"
-import { useContactsForm } from "../../components/contacts/_hooks/use-contacts-form.ts"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Title } from "../../components/common"
+import { getContactById, updateContact } from "../../api/contacts.ts"
+import { Contacts, ContactsForm } from "../../common/types/contacts.ts"
+import { ContactsFormSection } from "../../components/contacts/contacts-form-section.tsx"
 
 type Params = {
-  contactId: string
+  contactsId: string
 }
 
-const mockData: SelectOption[] = [
-  { value: "1", label: "Walmart" },
-  { value: "2", label: "Nike" },
-  { value: "3", label: "Tektronix" },
-  { value: "4", label: "Garmin" },
-  { value: "5", label: "HP" },
-]
-
 export const ContactsUpdatePage = () => {
-  const { contactId } = useParams<Params>()
+  const { contactsId } = useParams<Params>()
+  const [initialValue, setInitialValue] = useState<Contacts | undefined>()
+  const navigate = useNavigate()
+
+  const fetchContactById = async () => {
+    const contact = await getContactById(Number(contactsId))
+    setInitialValue(contact)
+  }
 
   useEffect(() => {
-    if (contactId) {
-      // TODO: fetch contact info and set contactInfo state
-      console.log("contactId:", contactId)
+    if (contactsId) {
+      fetchContactById()
     }
-  }, [contactId])
+  }, [contactsId])
 
-  const { setName, setPhone, setCompanyId, setEmail } = useContactsForm({})
-
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault()
-
-    // TODO: send data to server
+  const onSubmit = async (form: ContactsForm) => {
+    await updateContact({ ...form, id: Number(contactsId) })
+    navigate("/contacts")
   }
 
   return (
     <div>
       <Title text={"Update A Contact Entry"} />
-      <form className={FormPageCss.formContainer} onSubmit={onSubmit}>
-        <div className={FormPageCss.inputRow}>
-          <p className={FormPageCss.inputRowLabel}>Name</p>
-          <Input onBlur={(e) => setName(e.target.value)} />
-        </div>
-        <div className={FormPageCss.inputRow}>
-          <p className={FormPageCss.inputRowLabel}>Email</p>
-          <Input onBlur={(e) => setEmail(e.target.value)} />
-        </div>
-        <div className={FormPageCss.inputRow}>
-          <p className={FormPageCss.inputRowLabel}>Phone</p>
-          <Input onBlur={(e) => setPhone(e.target.value)} />
-        </div>
-        <div className={FormPageCss.inputRow}>
-          <p className={FormPageCss.inputRowLabel}>Company</p>
-          <Select options={mockData} onChange={setCompanyId} />
-        </div>
-        <div className={FormPageCss.submitContainer}>
-          <Button type={"submit"} variant={ButtonVariant.Green} width={100}>
-            Create
-          </Button>
-        </div>
-      </form>
+      {initialValue && (
+        <ContactsFormSection onSubmit={onSubmit} initialValue={initialValue} />
+      )}
     </div>
   )
 }

@@ -10,9 +10,9 @@ type Props = {
 
 export const useApplicationsForm = ({ initialValue }: Props) => {
   const [applicationForm, setApplicationForm] = useState<ApplicationForm>({
-    companyId: "",
-    jobId: "",
-    applyDate: "",
+    companyId: 0,
+    jobId: 0,
+    applydate: "",
     status: "",
   })
 
@@ -20,21 +20,20 @@ export const useApplicationsForm = ({ initialValue }: Props) => {
     key: keyof ApplicationForm,
     value: ApplicationForm[keyof ApplicationForm]
   ) => {
-    setApplicationForm({
-      ...applicationForm,
-      [key]: value,
+    setApplicationForm((prev) => {
+      return { ...prev, [key]: value }
     })
   }
 
   useEffect(() => {
     if (initialValue) {
-      const { applyDate, status, jobId, companyId } = initialValue
+      const { applydate, status, jobId, companyId } = initialValue
       setApplicationFormField("jobId", jobId)
-      setApplicationFormField("applyDate", applyDate)
+      setApplicationFormField("applydate", applydate)
       setApplicationFormField("status", status)
       setApplicationFormField("companyId", companyId)
     }
-  }, [initialValue])
+  }, [])
 
   return {
     applicationForm,

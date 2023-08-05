@@ -13,7 +13,6 @@ import {
 } from "../../components/common"
 import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { NavLink } from "react-router-dom"
-import { Pagination } from "../../components/common/Pagination.tsx"
 import { deleteJob, getJobsList } from "../../api/jobs.ts"
 
 export const JobsPage = () => {
@@ -40,7 +39,6 @@ export const JobsPage = () => {
         <NavLink to={"/jobs/new"}>
           <Button variant={ButtonVariant.Green}>create</Button>
         </NavLink>
-        <Pagination />
       </div>
       <TableContainer>
         <Table>

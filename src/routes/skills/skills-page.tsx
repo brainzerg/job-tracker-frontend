@@ -12,7 +12,6 @@ import {
 import { Skill } from "../../common/types/skill.ts"
 import TablePageCss from "../../styles/common-css/table-page.module.css"
 import { useEffect, useState } from "react"
-import { Pagination } from "../../components/common/Pagination.tsx"
 import { NavLink } from "react-router-dom"
 import { deleteSkill, getSkillsList } from "../../api/skills.ts"
 
@@ -50,7 +49,6 @@ export const SkillsPage = () => {
         <NavLink to={"/skills/new"}>
           <Button variant={ButtonVariant.Green}>create</Button>
         </NavLink>
-        <Pagination />
       </div>
       <TableContainer>
         <Table>

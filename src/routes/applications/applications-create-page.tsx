@@ -1,11 +1,15 @@
 import { Title } from "../../components/common"
 import { ApplicationsFormSection } from "../../components/applications/applications-form-section.tsx"
 import { ApplicationForm } from "../../common/types/applications.ts"
+import { createApplication } from "../../api/applications.ts"
+import { useNavigate } from "react-router-dom"
 
 export const ApplicationsCreatePage = () => {
-  const onSubmit = (applicationForm: ApplicationForm) => {
-    // TODO: post call to the server here
-    console.log(applicationForm)
+  const navigate = useNavigate()
+
+  const onSubmit = async (applicationForm: ApplicationForm) => {
+    await createApplication(applicationForm)
+    navigate("/applications")
   }
 
   return (

@@ -28,7 +28,7 @@ export const JobsUpdatePage = () => {
   }, [jobId])
 
   const onSubmit = async (jobForm: JobForm) => {
-    await updateJob(jobForm)
+    await updateJob({ ...jobForm, id: Number(jobId) })
     navigate("/jobs")
   }
 

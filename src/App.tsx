@@ -20,16 +20,20 @@ import { SkillsPage } from "./routes/skills/skills-page.tsx"
 import { SkillsCreatePage } from "./routes/skills/skills-create-page.tsx"
 import { SkillsUpdatePage } from "./routes/skills/skills-update-page.tsx"
 import { useEffect } from "react"
-import { setAccessToken } from "./api/config.ts"
+import { setAccessToken, setIdToken } from "./api/config.ts"
 
 function App() {
-  const { isLoading, getAccessTokenSilently } = useAuth0()
+  const { isLoading, getAccessTokenSilently, getIdTokenClaims } = useAuth0()
 
   useEffect(() => {
     async function setup() {
       const theToken = await getAccessTokenSilently()
+      const idToken = await getIdTokenClaims()
+
       setAccessToken(theToken)
+      setIdToken(idToken?.__raw || "")
     }
+
     setup()
   }, [])
 
